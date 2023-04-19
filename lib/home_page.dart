@@ -1,7 +1,7 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wordsapp/hiveword.dart';
+import 'package:wordsapp/home.dart';
 import 'package:wordsapp/info.dart';
 import 'package:wordsapp/services.dart';
 import 'package:wordsapp/words_model.dart';
@@ -53,103 +53,85 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          getEdit();
-        },
-        child: Icon(Icons.add),
-      ),
+          onPressed: () {
+            getEdit();
+          },
+          child: Icon(Icons.add)),
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.7,
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 160),
-        child: Center(
-            child: PageView.builder(
-                onPageChanged: (value) {
-                  setState(() {
-                    defi = '';
-                    fonetic = '';
-                    turk = true;
-                  });
-                },
-                itemCount: unifyList.length,
-                itemBuilder: (context, index) {
-                  var data = unifyList[index];
-                  return Stack(
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.8,
-                        child: Column(
+        alignment: Alignment.center,
+        margin: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.15,
+        ),
+        child: AspectRatio(
+          aspectRatio: MediaQuery.of(context).size.width * 0.00143,
+          child: Center(
+              child: PageView.builder(
+                  onPageChanged: (value) {
+                    setState(() {
+                      defi = '';
+                      fonetic = '';
+                      turk = true;
+                    });
+                  },
+                  itemCount: unifyList.length,
+                  itemBuilder: (context, index) {
+                    var data = unifyList[index];
+                    return Center(
+                      child: Container(
+                        child: Row(
                           children: [
-                            loading == false
-                                ? CircularProgressIndicator()
-                                : Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 5.0),
-                                    decoration:
-                                        BoxDecoration(color: Colors.amber),
-                                    child: Center(
-                                        child: Column(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: 24),
-                                          child: Text(
-                                            data.toUpperCase(),
-                                            style: const TextStyle(
-                                                fontSize: 42.0,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 30,
-                                        ),
-                                        belirtec == false
-                                            ? CircularProgressIndicator()
-                                            : Column(
-                                                children: [
-                                                  Container(
-                                                      margin: belirtec == false
-                                                          ? EdgeInsets
-                                                              .symmetric(
-                                                                  vertical: 24,
-                                                                  horizontal:
-                                                                      32)
-                                                          : EdgeInsets
-                                                              .symmetric(
-                                                                  vertical: 5,
-                                                                  horizontal:
-                                                                      32),
-                                                      child: Text(
-                                                        defi,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: const TextStyle(
-                                                          fontSize: 16.0,
-                                                        ),
-                                                      )),
-                                                  Container(
-                                                      margin: const EdgeInsets
-                                                              .symmetric(
-                                                          vertical: 24,
-                                                          horizontal: 32),
-                                                      child: Text(
-                                                        fonetic,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: const TextStyle(
-                                                          fontSize: 16.0,
-                                                        ),
-                                                      )),
-                                                  Container(
-                                                      margin: const EdgeInsets
-                                                              .symmetric(
-                                                          vertical: 24,
-                                                          horizontal: 32),
-                                                      child: turk == false
-                                                          ? Text(
-                                                              TumModel_listem[
-                                                                      index]
-                                                                  .turkish,
+                            const Spacer(
+                              flex: 1,
+                            ),
+                            Expanded(
+                              flex: 18,
+                              child: Column(
+                                children: [
+                                  loading == false
+                                      ? CircularProgressIndicator()
+                                      : Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 36),
+                                          decoration: BoxDecoration(
+                                              color: Colors.amber),
+                                          child: Center(
+                                              child: Column(
+                                            children: [
+                                              Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 36),
+                                                child: Text(
+                                                  data.toUpperCase(),
+                                                  style: const TextStyle(
+                                                      fontSize: 42.0,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 30,
+                                              ),
+                                              belirtec == false
+                                                  ? CircularProgressIndicator()
+                                                  : Column(
+                                                      children: [
+                                                        Container(
+                                                            margin: belirtec ==
+                                                                    false
+                                                                ? const EdgeInsets
+                                                                        .symmetric(
+                                                                    vertical:
+                                                                        24,
+                                                                    horizontal:
+                                                                        32)
+                                                                : const EdgeInsets
+                                                                        .symmetric(
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                        32),
+                                                            child: Text(
+                                                              defi,
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
@@ -157,59 +139,109 @@ class _HomePageState extends State<HomePage> {
                                                                   const TextStyle(
                                                                 fontSize: 16.0,
                                                               ),
-                                                            )
-                                                          : Text('')),
+                                                            )),
+                                                        Container(
+                                                            margin:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    vertical:
+                                                                        24,
+                                                                    horizontal:
+                                                                        32),
+                                                            child: Text(
+                                                              fonetic,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 16.0,
+                                                              ),
+                                                            )),
+                                                        Container(
+                                                            margin:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    vertical:
+                                                                        24,
+                                                                    horizontal:
+                                                                        32),
+                                                            child: turk == false
+                                                                ? Text(
+                                                                    TumModel_listem[
+                                                                            index]
+                                                                        .turkish,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      fontSize:
+                                                                          16.0,
+                                                                    ),
+                                                                  )
+                                                                : Text('')),
+                                                      ],
+                                                    ),
+                                              Container(
+                                                  child: Text(
+                                                '${TumModel_listem.length} / ${index + 1}',
+                                                style: const TextStyle(
+                                                    fontSize: 20),
+                                              )),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Container(
+                                                    margin: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 24),
+                                                    child: ElevatedButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            getDataService(
+                                                                data);
+                                                            belirtec =
+                                                                !belirtec;
+                                                            '''getSetHiveWord(i.word,[_model[0].meanings![0].definitions![0].definition!],_model[0].phonetics![0].text!)''';
+                                                            setState(() {});
+                                                          });
+                                                        },
+                                                        child: Text(
+                                                            'Get Meaning')),
+                                                  ),
+                                                  Container(
+                                                    child: ElevatedButton(
+                                                        onPressed: () {
+                                                          var deleteBox =
+                                                              Hive.box(
+                                                                  'worddoc5');
+                                                          deleteBox.delete(
+                                                              TumModel_listem[
+                                                                      index]
+                                                                  .word);
+                                                        },
+                                                        child: Text(
+                                                            'Delete item')),
+                                                  ),
                                                 ],
                                               ),
-                                        Container(
-                                            child: Text(
-                                          TumModel_listem.length.toString() +
-                                              ' / ' +
-                                              (index + 1).toString(),
-                                          style: TextStyle(fontSize: 20),
-                                        )),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Container(
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 24),
-                                              child: ElevatedButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      getDataService(data);
-                                                      belirtec = !belirtec;
-                                                      '''getSetHiveWord(i.word,[_model[0].meanings![0].definitions![0].definition!],_model[0].phonetics![0].text!)''';
-                                                      setState(() {});
-                                                    });
-                                                  },
-                                                  child: Text('Get Meaning')),
-                                            ),
-                                            Container(
-                                              child: ElevatedButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      var deleteBox =
-                                                          Hive.box('worddoc5');
-                                                      deleteBox.delete(
-                                                          TumModel_listem[index]
-                                                              .word);
-                                                    });
-                                                  },
-                                                  child: Text('Delete Item')),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ))),
+                                            ],
+                                          ))),
+                                ],
+                              ),
+                            ),
+                            const Spacer(
+                              flex: 1,
+                            )
                           ],
                         ),
                       ),
-                    ],
-                  );
-                })),
+                    );
+                  })),
+        ),
       ),
     );
   }
@@ -233,7 +265,6 @@ class _HomePageState extends State<HomePage> {
         unifyList.add(a.word.toString());
       });
     }
-  
 
     for (var b in word_list) {
       setState(() {
@@ -257,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Container(
                       margin: const EdgeInsets.all(16),
-                      child: Text(
+                      child: const Text(
                           'Girmek istediginiz kelime ve anlamını belirtiniz'),
                     ),
                     TextField(
@@ -265,13 +296,14 @@ class _HomePageState extends State<HomePage> {
                       decoration: InputDecoration(
                           label: Container(
                               margin: const EdgeInsets.only(top: 16),
-                              child: Text("kelime giriniz")),
-                          border: OutlineInputBorder(borderSide: BorderSide()),
+                              child: const Text("kelime giriniz")),
+                          border: const OutlineInputBorder(
+                              borderSide: BorderSide()),
                           hintText: 'kelime giriniz',
-                          hintStyle: TextStyle(
+                          hintStyle: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.normal)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 24,
                     ),
                     TextField(
@@ -284,10 +316,10 @@ class _HomePageState extends State<HomePage> {
                               child: Text("Anlam giriniz")),
                           border: OutlineInputBorder(borderSide: BorderSide()),
                           hintText: 'Anlam giriniz',
-                          hintStyle: TextStyle(
+                          hintStyle: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.normal)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 24,
                     ),
                     ElevatedButton(
@@ -297,9 +329,9 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                                  builder: (context) => const Home()));
                         },
-                        child: Text('kaydet'))
+                        child: const Text('kaydet'))
                   ],
                 ),
               ),

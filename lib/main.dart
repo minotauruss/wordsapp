@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wordsapp/hiveword.dart';
+import 'package:wordsapp/home.dart';
 import 'package:wordsapp/home_page.dart';
 
 void main() async {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
   
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: Home(),
     );
   }
 }
